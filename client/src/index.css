@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-white font-sans overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .text-neon-cyan {
+    color: #00E7FF;
+    text-shadow: 0 0 10px rgba(0, 231, 255, 0.5);
+  }
+  
+  .text-neon-green {
+    color: #00FF6A;
+    text-shadow: 0 0 10px rgba(0, 255, 106, 0.5);
+  }
+
+  .bg-neon-cyan {
+    background-color: #00E7FF;
+    box-shadow: 0 0 15px rgba(0, 231, 255, 0.5);
+  }
+
+  .bg-neon-green {
+    background-color: #00FF6A;
+    box-shadow: 0 0 15px rgba(0, 255, 106, 0.5);
+  }
+
+  .border-neon-cyan {
+    border-color: #00E7FF;
+    box-shadow: 0 0 10px rgba(0, 231, 255, 0.3);
+  }
+  
+  .border-neon-green {
+    border-color: #00FF6A;
+    box-shadow: 0 0 10px rgba(0, 255, 106, 0.3);
+  }
+}
