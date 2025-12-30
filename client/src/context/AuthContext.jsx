@@ -35,11 +35,11 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(userData));
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            setUser(userData);
-            return true;
+            return userData;
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
-            return false;
+            console.error('Login Error:', err);
+            setError(err.response?.data?.message || err.message || 'Login failed');
+            return null;
         }
     };
 

@@ -16,7 +16,8 @@ router.post('/signup', async (req, res) => {
     const { name, email, phone, password, age, height, weight, gender, address, fitnessGoal } = req.body;
 
     try {
-        const userExists = await User.findOne({ email });
+        // Check if user exists (case-insensitive)
+        const userExists = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
         if (userExists) {
             return res.status(400).json({ message: 'User already exists' });
         }
@@ -26,7 +27,7 @@ router.post('/signup', async (req, res) => {
 
         const user = await User.create({
             name,
-            email,
+            email: email.toLowerCase(), // Always store new users as lowercase
             phone,
             password: hashedPassword,
             age,
@@ -42,6 +43,7 @@ router.post('/signup', async (req, res) => {
                 _id: user.id,
                 name: user.name,
                 email: user.email,
+                role: user.role, // Include role
                 token: generateToken(user.id),
             });
         } else {
@@ -58,13 +60,15 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        // Check for user (case-insensitive to handle legacy data)
+        const user = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
 
         if (user && (await bcrypt.compare(password, user.password))) {
             res.json({
                 _id: user.id,
                 name: user.name,
                 email: user.email,
+                role: user.role, // Include role
                 token: generateToken(user.id),
             });
         } else {
@@ -98,6 +102,7 @@ router.post('/otp-login', async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            role: user.role, // Include role
             token: generateToken(user.id),
         });
     } catch (error) {

@@ -9,7 +9,10 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Store from './pages/Store'; // Import Store page
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import AdminRoute from './components/auth/AdminRoute';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   return (
@@ -27,7 +30,13 @@ function App() {
           <Route path="/trainers" element={<Trainers />} />
           <Route path="/classes" element={<Classes />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/store" element={<Store />} /> {/* Add Store Route */}
           <Route path="/contact" element={<Contact />} />
+        </Route>
+
+        {/* Admin Routes */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
         </Route>
 
         {/* Catch all - Redirect to login */}

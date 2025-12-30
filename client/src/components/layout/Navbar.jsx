@@ -39,8 +39,8 @@ const Navbar = () => {
                             key={link.name}
                             to={link.path}
                             className={`text-sm font-medium tracking-wide transition-colors duration-300 ${isActive(link.path)
-                                    ? 'text-neon-green'
-                                    : 'text-gray-300 hover:text-neon-cyan'
+                                ? 'text-neon-green'
+                                : 'text-gray-300 hover:text-neon-cyan'
                                 }`}
                         >
                             {link.name}
@@ -52,6 +52,13 @@ const Navbar = () => {
                             <span className="text-white text-sm font-medium tracking-wide">
                                 Hi, <span className="text-neon-cyan">{user.name.split(' ')[0]}</span>
                             </span>
+                            {user.role === 'admin' && (
+                                <Link to="/admin">
+                                    <Button variant="glow" className="px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
+                                        Admin
+                                    </Button>
+                                </Link>
+                            )}
                             <Button onClick={logout} variant="outline" className="px-5 py-1.5 text-sm border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500">
                                 Logout
                             </Button>
@@ -92,6 +99,11 @@ const Navbar = () => {
                     {user ? (
                         <div className="flex flex-col items-center space-y-3 mt-4 w-full px-6">
                             <span className="text-white">Logged in as {user.name}</span>
+                            {user.role === 'admin' && (
+                                <Link to="/admin" onClick={() => setIsOpen(false)}>
+                                    <span className="text-neon-cyan font-bold uppercase tracking-widest text-sm">Dashboard</span>
+                                </Link>
+                            )}
                             <Button onClick={() => { logout(); setIsOpen(false); }} variant="outline" className="w-full border-red-500 text-red-500">
                                 Logout
                             </Button>

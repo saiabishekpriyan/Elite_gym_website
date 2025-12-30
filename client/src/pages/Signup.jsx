@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import { useAuth } from '../context/AuthContext';
 
@@ -35,7 +34,7 @@ const Signup = () => {
         const userData = {
             name: formData.fullName,
             email: formData.email,
-            phone: formData.phone,
+            phone: `+91${formData.phone}`,
             password: formData.password,
             age: formData.age ? Number(formData.age) : undefined,
             height: formData.height,
@@ -82,7 +81,12 @@ const Signup = () => {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-300 ml-1">Phone</label>
-                                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-3 text-white focus:border-neon-green focus:ring-1 focus:ring-neon-green transition-all outline-none" placeholder="+1 (555)..." required />
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <span className="text-neon-green font-bold">+91</span>
+                                    </div>
+                                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-black/40 border border-white/10 rounded-xl pl-14 pr-5 py-3 text-white focus:border-neon-green focus:ring-1 focus:ring-neon-green transition-all outline-none" placeholder="98765 43210" required />
+                                </div>
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-300 ml-1">Address</label>

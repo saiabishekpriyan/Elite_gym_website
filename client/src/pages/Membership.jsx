@@ -36,15 +36,38 @@ const Membership = () => {
 
     return (
         <Layout>
-            <div className="bg-dark-bg min-h-screen py-20">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h1 className="text-4xl md:text-6xl font-bold uppercase mb-4 text-white">
-                            Membership <span className="text-neon-cyan">Plans</span>
-                        </h1>
-                        <p className="text-gray-400">Choose the plan that fits your journey.</p>
-                    </div>
+            {/* Hero Section */}
+            <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1540497077202-7c8a33801f0a?q=80&w=2070&auto=format&fit=crop"
+                        alt="Gym Membership"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
+                </div>
 
+                {/* Hero Content */}
+                <div className="relative z-10 text-center px-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <h1 className="text-5xl md:text-7xl font-bold uppercase mb-4 text-white tracking-widest">
+                            Membership <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-emerald-500">Plans</span>
+                        </h1>
+                        <p className="text-gray-300 text-lg md:text-xl tracking-[0.2em] font-light uppercase">
+                            Choose the plan that fits your journey
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Plans Section */}
+            <div className="bg-charcoal min-h-screen py-20 relative">
+                <div className="container mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {plans.map((plan, index) => (
                             <motion.div
@@ -52,7 +75,7 @@ const Membership = () => {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className={`relative bg-charcoal-light rounded-3xl p-8 border-2 ${plan.borderColor} ${plan.glow ? plan.glow : 'hover:border-white/30'} flex flex-col items-center text-center transition-all duration-300`}
+                                className={`relative bg-charcoal-light rounded-3xl p-8 border-2 ${plan.borderColor} ${plan.glow ? plan.glow : 'hover:border-white/30'} flex flex-col items-center text-center transition-all duration-300 hover:transform hover:-translate-y-2`}
                             >
                                 {plan.label && (
                                     <div className="absolute -top-4 bg-neon-cyan text-black text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-neon">
